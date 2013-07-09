@@ -1,4 +1,14 @@
 <?php
-$message="<span class='ui-icon ui-icon-circle-check' style='float:left; margin:0 7px 50px 0;'></span> Your File has been submitted";
-echo $message;
+if(isset($_FILES)){
+  foreach($_FILES as $file){
+		$upload_dir = "";
+		if(move_uploaded_file($file['tmp_name'], $upload_dir.$file['name'])){
+			echo ":) File {$file['name']} uploaded successfully<br>";
+		} else {
+			echo ":( File {$file['name']} could not be uploaded<br>";
+		}
+	}	
+} else {
+	echo ":( Oops! Nothing here<br>";
+}
 ?>
