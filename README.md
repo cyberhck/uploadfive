@@ -1,4 +1,31 @@
 uploadfive
 ==========
 
-jQuery based plugin for upload script, just use this script and initiate the script over the element and the element changes to beautiful upload client where user selects file and gets a upload button, the upload progress is shown in a progress bar and uploaded and remaining are displayed in a div. Very useful for file uploads
+A jQuery based file upload plugin.
+
+
+Usage
+=======
+
+Include  `uploadfive.js`
+
+Use the following script
+
+```js
+$(document).ready(function(e) {
+$("#uploadfive").uploadfive();
+});
+```
+
+And add the following html
+```html
+<div id="upload" action="method.php"></div>
+```
+
+`method.php` must contain your real file upload script. You can also use it for `asp` or `jsp` just change the `action` attribute for the div.
+
+Dependencies
+=============
+
+Needs jQuery, jQuery UI (progressbar) 
+
