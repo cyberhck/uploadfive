@@ -24,6 +24,7 @@ And add the following html
 
 `method.php` must contain your real file upload script. You can also use it for `asp` or `jsp` just change the `action` attribute for the div.
 
+The element to be made upload client must be a ```<div>``` element, it can not be a ```<form>```.
 Dependencies
 =============
 
