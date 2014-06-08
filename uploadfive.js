@@ -15,6 +15,18 @@ function file_selected()
 	$('.uploadfive .show_or_hide_details').show();
 	$('.uploadfive .upload').show();
 }
+window.def=0;
+window.abc=0;
+function calc(){
+prev=window.def
+now=window.abc
+uploaded=now-prev;
+speed=((uploaded))*2;
+speed=file_size_text(speed)+"/S";
+$("#speedDisplay").html(speed);
+window.def=now;
+}
+
 function file_size_text(size)
 {
 	if(size==0)
@@ -44,9 +56,12 @@ function upload()
 	http.addEventListener("abort", uploadCanceled, false);
 	http.open("POST",action,true);
 	http.send(fd);
+	window.abc=0;
+	window.speed=setInterval(calc,500);
 }
 function uploadProgress(e)
 {
+	window.abc=e.loaded;
 	percentage=e.loaded*100/e.total;
 	$('.uploadfive .percentage').html(Math.round(percentage*1000)/1000+" %");
 	$('.uploadfive .progressbar').progressbar({value:(percentage)});
@@ -70,6 +85,7 @@ function uploadComplete(e)
 					$(this).dialog("close");
 				}
 			}});
+	clearInterval(window.speed);
 }
 function uploadFailed(e)
 {
@@ -79,7 +95,7 @@ function uploadCanceled(e)
 }
 jQuery.fn.uploadfive=function(){
 	$(this).addClass('uploadfive');
-	a='<div class="titlebar"><span class="filename">Click Browse Button to browse for files</span><span class="percentage">0%</span></div><div class="progressbar"></div><span class="show_or_hide_details">Show/Hide Details</span><div class="details" style="display:none;">File Name: <span class="filename"></span><br />File Size: <span class="filesize"></span><br />File Type: <span class="filetype"></span><br />Uploaded: <span class="uploaded"></span><br />Remaining: <span class="remaining"></span><br /></div><input type="file" id="randomizethisidsothatitisnotmatching" name="file_selected" onChange="file_selected();" class="file" /><div class="button_container"><span><input type="button" value="Browse" class="browse" /><input type="button" value="cancel" class="cancel" /></span><span class="upload_button"><input type="button" value="upload" class="upload" /></span></div><div style="display:none;"id="uploadfive_dialog"></div>';
+	a='<div class="titlebar"><span class="filename">Click Browse Button to browse for files</span><span class="percentage">0%</span></div><div class="progressbar"></div><span class="show_or_hide_details">Show/Hide Details</span><div class="details" style="display:none;">File Name: <span class="filename"></span><br />File Size: <span class="filesize"></span><br />File Type: <span class="filetype"></span><br />Uploaded: <span class="uploaded"></span><br />Remaining: <span class="remaining"></span><br />Speed:<span id="speedDisplay"></span><br /></div><input type="file" id="randomizethisidsothatitisnotmatching" name="file_selected" onChange="file_selected();" class="file" /><div class="button_container"><span><input type="button" value="Browse" class="browse" /><input type="button" value="cancel" class="cancel" /></span><span class="upload_button"><input type="button" value="upload" class="upload" /></span></div><div style="display:none;"id="uploadfive_dialog"></div>';
 	$(this).html(a);
 	$('.uploadfive .progressbar').progressbar({value:0});
 	$('.uploadfive .browse').bind('click',function(){
