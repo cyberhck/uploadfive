@@ -1,7 +1,7 @@
 uploadfive
 ==========
-
-A jQuery based file upload plugin.
+### Started doing this project just for fun, but it turned out to be used in many of my projects.
+A jQuery based file upload plugin, but still this is a spaghetti code, may be it is very hard to understand the code, and so is its maintainability, but for now, I'm using this, still looking forward if I can change the code entirely and solve some issues, currently there is only 2 issues, one is you can use this plugin only once in a document. And you have no control when the file upload is success, I'll be re coding this is node.js's way, still you can hack around uploadfive.js and change the script which is used to handle the complete event. And one more thing, you can't really hit cancel once the upload has started, so if your user wants to hit cancel, tell them to refresh the browser.
 
 
 Usage
